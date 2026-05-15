@@ -63,35 +63,3 @@ document.getElementById("url").addEventListener("input", function(e) {
   }
 });
 
-// --- Matrix Background Dynamic Generation ---
-function generateMatrix() {
-  const matrix = document.querySelector('.jp-matrix');
-  const chars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポ";
-  
-  // Estimate cell size based on current window width to match CSS media queries
-  let cellSize = 40; // Default PC size
-  if (window.innerWidth <= 480) {
-    cellSize = 20; // Mobile size
-  } else if (window.innerWidth <= 768) {
-    cellSize = 25; // Tablet size
-  }
-  
-  // Calculate how many columns and rows are needed to fill the screen
-  const cols = Math.floor(window.innerWidth / cellSize) + 2; // +2 for safety margin
-  const rows = Math.floor(window.innerHeight / cellSize) + 2;
-  const totalChars = cols * rows;
-  
-  // Generate the required number of spans
-  let html = '';
-  for (let i = 0; i < totalChars; i++) {
-    html += `<span>${chars.charAt(Math.floor(Math.random() * chars.length))}</span>`;
-  }
-  
-  matrix.innerHTML = html;
-}
-
-// Generate matrix on load
-generateMatrix();
-
-// Re-generate matrix when window is resized or device orientation changes
-window.addEventListener('resize', generateMatrix);
